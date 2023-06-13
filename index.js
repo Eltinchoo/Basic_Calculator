@@ -4,10 +4,9 @@ const buttons = document.querySelectorAll(".btn");
 let value = "";
 let newValue = "";
 
-function calculator(e) {
-
-  const key = e.target.textContent;
-  switch (key) {
+function calcular(e) {
+  const tecla = e.target.textContent;
+  switch (tecla) {
     case "=":
       display.textContent = eval(value.replace("x", "*"));
       value = eval(value.replace("x", "*"));
@@ -18,11 +17,14 @@ function calculator(e) {
       break;
     case "%":
       let values = [];
+      //cuando presiono el porcentaje
+      //calcula el porcentaje del valor que puse
+      // se queda con la operacion
       newValue = value.replace(/[^\d?]/g, " ");
-      const operador = value.replace(/[\d?]/g, " ").trim();
+      const oeprador = value.replace(/[\d?]/g, " ").trim();
       values = newValue.split(" ");
       let porcentaje = (values[0] * values[1]) / 100;
-      value = `${values[0]}${operador}${porcentaje}`;
+      value = `${values[0]}${oeprador}${porcentaje}`;
       display.textContent = value;
       break;
     case "+":
@@ -30,11 +32,11 @@ function calculator(e) {
     case "x":
     case "/":
     default:
-      value += key;
+      value += tecla;
       display.textContent = value;
   }
 }
 
 for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener("click", calculator);
+  buttons[i].addEventListener("click", calcular);
 }
